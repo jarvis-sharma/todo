@@ -1,0 +1,80 @@
+<style>
+    body {
+        background-color: lightpink;
+    }
+
+    .center {
+        width: 600px;
+
+        background-color: aqua;
+        margin: auto;
+        padding: 2px 2px 2px 2px;
+        border-radius: 2px;
+        align-content: center;
+    }
+
+    .sub {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 30%;
+        font-size: 16px;
+        display: inline;
+        text-align: center;
+        border: none;
+        text-decoration: none;
+        box-sizing: border-box;
+        padding: 15px 32px;
+    }
+
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-color: brown;
+    }
+
+    .item {
+        background-color: burlywood;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 3px;
+
+    }
+
+    .head {
+        text-align: center;
+    }
+
+    #ss {
+        margin-left: 40%;
+    }
+</style>
+
+<body>
+    <h1 class="head">To Do List</h2>
+        <div class="center">
+            <form method="POST" action="/" class="sub">
+                {%csrf_token%}
+                {{form.title}}
+                <input type="submit" name="create Task" id="ss" class="button">
+            </form>
+            {% for task in tasks %}
+            <div class="item">
+                <a href="{%url 'update_task' task.id%}" class="button">Update</a>
+                <a href="{%url 'delete_task' task.id%}" class="button">Delete</a>
+                {% if task.complete == True %}
+                <strike>{{task}}</strike>
+                {% else %}
+                <span>{{task}}</span>
+                {% endif %}
+            </div>
+            {%endfor%}
+        </div>
+</body>
